@@ -1,6 +1,6 @@
 package mypackage;
 
-import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Album {
     protected List<SoundClip> songs;
 
 
-    public Album(String name) {
+    public Album(@NotNull String name) {
         assert name != null;
         this.name = name;
         this.subAlbums = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Album {
      * @param album The album to add
      * @throws AssertionError Throws an AssertionsError if the passed in album is null */
 
-    public void addAlbum(Album album) {
+    public void addAlbum(@NotNull Album album) {
         assert album != null;
         album.parent = this;
         this.subAlbums.add(album);
@@ -33,21 +33,18 @@ public class Album {
     /**
      * Removes an album from this albums sub albums
      * @param album The album to remove
-     * @throws AssertionError Throws an AssertionsError if the passed in album is null
-     * @return Returns true if this contained the album to be removed, false otherwise*/
+     * @throws AssertionError Throws an AssertionsError if the passed in album is null*/
 
-    public boolean removeAlbum(Album album) {
+    public void removeAlbum(@NotNull Album album) {
         assert album != null;
         album.parent = null;
-        final var result = this.containsAlbum(album);
         this.subAlbums.remove(album);
-        return result;
     }
     /**
      * @param album The album that this album might contain
      * @return Returns true if the album is part of this albums sub albums, otherwise false
      * @throws AssertionError Throws an AssertionsError if the passed in album is null*/
-    public boolean containsAlbum(Album album) {
+    public boolean containsAlbum(@NotNull Album album) {
         assert album != null;
         return this.subAlbums.contains(album);
     }
@@ -57,27 +54,24 @@ public class Album {
      * @param song The song to add
      * @throws AssertionError Throws an AssertionsError if the passed in song is null*/
 
-    public void addSong(SoundClip song) {
+    public void addSong(@NotNull SoundClip song) {
         assert song != null;
         this.songs.add(song);
     }
     /**
      * Removes a song from this albums songs
      * @param song The song to remove
-     * @throws AssertionError Throws an AssertionsError if the passed in song is
-     * @return Returns true if this contained the song to be removed, false otherwise*/
+     * @throws AssertionError Throws an AssertionsError if the passed in song is*/
 
-    public boolean removeSong(SoundClip song) {
+    public void removeSong(@NotNull SoundClip song) {
         assert song != null;
-        final var result = this.containsSong(song);
         this.songs.remove(song);
-        return result;
     }
     /**
      * @param song The song that this album might contain
      * @return Returns true if the song is part of this albums songs, otherwise false
      * @throws AssertionError Throws an AssertionsError if the passed in song is null*/
-    public boolean containsSong(SoundClip song) {
+    public boolean containsSong(@NotNull SoundClip song) {
         assert song != null;
         return this.songs.contains(song);
     }
